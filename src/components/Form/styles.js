@@ -1,34 +1,91 @@
 import styled from 'styled-components';
-import { TextField } from '@material-ui/core';
+import { lighten } from 'polished';
 
-export const FormControll = styled.form`
-    width: auto;
-    margin-top: 40px;
+import { TextField, FormControl, FormControlLabel, Checkbox } from '@material-ui/core';
 
+export const Wrapper = styled.div`
+    width: 100%;
+    padding: 0 300px;
+
+    @media screen and (max-width: 540px) {
+        padding: 0 40px;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    }
+   
+`;
+
+export const FormCars = styled.form`
+    height: 100%;
+    margin-top: 15px;
+    
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
 
-    @media screen and (min-width: 314px), (max-width: 540px) {
-        padding: 15px 35px;
+    img {
+        width: 200px;
+        margin: 20px 0px 40px;
+    
+        @media screen and (max-width: 540px) {
+            width: 160px;
+            margin-top: 20px;
+            margin-bottom: 60px;
+        }
     }
 `;
 
 export const Text = styled(TextField)`
     width: 100%;
-    max-width: 600px;
     margin-bottom: 20px !important;
     background: #fff;
     border-radius: 4px;
     
     label {
-        padding: 0px 10px !important;
-        margin-bottom: 40px !important;
-        color: #915dc9; 
+        color: #7159c1;
     }
+`;
 
-    @media screen and (min-width: 314px), (max-width: 540px) {
-        width: 100%;
+export const SelectControl = styled(FormControl)`
+    width: 100%;
+    margin-bottom: 20px !important;
+    background: #fff;
+    border-radius: 4px;
+`;
+
+export const ControlLabel = styled(FormControlLabel)`
+    margin-top: 10px !important;
+    color: #fff;
+`;
+
+export const Check = styled(Checkbox)`
+    color: #7159c1 !important;
+`;
+
+export const Button = styled.button`
+    width: 100%;
+    border: none;
+    border-radius: 2px;
+    padding: 12px;
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: white;
+    background-color: ${props => props.color};
+    box-shadow: 0 0 4px #999;
+    outline: none;
+    background-position: center;
+    transition: background 0.8s;
+
+    &:hover {
+        background: ${ props => lighten(0.1, props.color)} radial-gradient(circle, transparent 1%, ${ props => lighten(0.1, props.color)} 1%) center / 15000%;
+    }
+    
+    &:active {
+        background-color: ${props => lighten(0.1, props.color)} ;
+        background-size: 100%;
+        transition: background 0s;
     }
 `;

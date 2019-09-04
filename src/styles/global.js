@@ -18,19 +18,17 @@ export default createGlobalStyle`
 
     html, body, #root {
         height: 100%;
-        background: #bea2e7;
-        background: -moz-linear-gradient(top, #bea2e7 0%, #86b7e7 100%);
-        background: -webkit-linear-gradient(top, #bea2e7 0%, #86b7e7 100%);
-        background: linear-gradient(to bottom, #bea2e7 0%, #86b7e7 100%);
-        background-repeat: no-repeat;
+        
     }
 
     body {
+        -webkit-font-smoothing: antialiased;
+        width: 100%;
+        height: 100%;
         top: 0;
         bottom: 0;
-        -webkit-font-smoothing: antialiased;
-        
-        
+        background: linear-gradient(to bottom, #8865d6, #a6d4ff);
+        background-repeat: no-repeat;
     }
 
     body, input, button {
