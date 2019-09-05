@@ -20,6 +20,34 @@ export const Wrapper = styled.div`
             font-size: 14px;
         }
     }
+
+    ul {
+        height: 300px;
+        padding: 40px 0;
+        margin-top: 20px;
+        overflow: auto;
+        
+        li {
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            background: rgba(255,255,255, 0.4);
+
+            h1 {
+                color: #7159c1;
+            }
+
+            p {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                font-weight: 300;
+            }
+
+            span {
+                font-weight: bold;
+            }
+        }
+    }
 `;
 
 export const FormCars = styled.form`
