@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-
 import 'react-toastify/dist/ReactToastify.css';
 
 export default createGlobalStyle`
@@ -16,19 +15,13 @@ export default createGlobalStyle`
         outline: 0;
     }
 
-    html, body, #root {
-        height: 100%;
-        
-    }
-
     body {
-        -webkit-font-smoothing: antialiased;
         width: 100%;
         height: 100%;
-        top: 0;
-        bottom: 0;
-        background: linear-gradient(to bottom, #8865d6, #a6d4ff);
-        background-repeat: no-repeat;
+        background: #bea2e7;
+        background: linear-gradient(145deg, #bea2e7 0%, #86b7e7 100%) center 100% no-repeat;
+        background: -moz-linear-gradient(145deg, #bea2e7 0%, #86b7e7 100%) center 100% no-repeat ;
+        -webkit-font-smoothing: antialiased;
     }
 
     body, input, button {

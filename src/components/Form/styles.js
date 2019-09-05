@@ -8,12 +8,18 @@ export const Wrapper = styled.div`
     padding: 0 300px;
 
     @media screen and (max-width: 540px) {
-        padding: 0 40px;
-        margin: 0;
-        width: 100%;
-        height: 100%;
+        padding: 0 10px;
     }
-   
+
+    h2 {
+        padding: 35px 0;
+        text-align: center;
+        color: rgba(0,0,0,0.4);
+
+        @media screen and (max-width: 540px) {
+            font-size: 14px;
+        }
+    }
 `;
 
 export const FormCars = styled.form`
@@ -53,6 +59,11 @@ export const SelectControl = styled(FormControl)`
     margin-bottom: 20px !important;
     background: #fff;
     border-radius: 4px;
+
+    label {
+        color: #7159c1;
+    }
+
 `;
 
 export const ControlLabel = styled(FormControlLabel)`
