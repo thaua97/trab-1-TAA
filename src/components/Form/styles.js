@@ -11,6 +11,14 @@ export const Wrapper = styled.div`
         padding: 0 10px;
     }
 
+    h6 {
+        margin-top: 40px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 400;
+        color: rgba(0,0,0,0.4);
+    }
+
     h2 {
         padding: 35px 0;
         text-align: center;

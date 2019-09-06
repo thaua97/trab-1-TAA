@@ -70,9 +70,11 @@ export default function Form() {
     }
 
     function handleCalculc() {
-        setSafe(0)
+        setSafe(0);
         if(!mark){
             toast.warn("Selecione a marca do veiculo");
+        } else if (!fipe || fipe === 'NaN' ) {
+            toast.warn("Informe o valor do veiculo")  
         } else if (renew === true && (mark === 'Fiat' || mark === 'Chevrolet')) {
             const safeValue = 97 / 100;
             const total = fipe - (fipe * safeValue);
@@ -111,7 +113,7 @@ export default function Form() {
             toast.warn('preencha o valor da tabela FIPE');
         } else {
             try {
-                let data = []
+                let data = [];
                 
                 if(localStorage.getItem('@spacecar/item')) {
                     data = await JSON.parse(localStorage.getItem('@spacecar/item'));
@@ -190,7 +192,7 @@ export default function Form() {
                             <Button type="submit" color="#7159c1">Registrar Interesse</Button> 
                         </>
                         :
-                    null
+                        null
                     }
                 </FormCars>
                 {item !== '' ? 
@@ -219,10 +221,9 @@ export default function Form() {
                         }
                     </ul>
                     :
-                     <>
-                        <em></em>
-                        <em></em>
-                     </>
+                     
+                    <h6>Nenhuma proposta registrada ou encontrada</h6>
+                     
                 }                
             </Wrapper>
         </Container>
