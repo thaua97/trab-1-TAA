@@ -14,17 +14,17 @@ export default function Footer() {
                 </div>
                 <ul>
                     <li>
-                        <a href="">
+                        <a href="https://github.com/thaua97?tab=repositories" rel="noopener noreferrer" target="_blank">
                            <GoMarkGithub size={26} />
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="https://github.com/thaua97/trab-1-TAA" rel="noopener noreferrer" target="_blank">
                             <GoRepo size={26} />
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="https://www.instagram.com/thaua97/" rel="noopener noreferrer" target="_blank">
                             <FiInstagram size={26}/>
                         </a>
                     </li>

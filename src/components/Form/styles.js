@@ -26,7 +26,7 @@ export const Wrapper = styled.div`
         padding: 40px 0;
         margin-top: 20px;
         overflow: auto;
-        
+
         li {
             padding: 15px;
             margin-bottom: 25px;
