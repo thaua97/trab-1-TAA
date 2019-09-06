@@ -41,19 +41,12 @@ export const Wrapper = styled.div`
                     font-weight: 300;
                 }
 
-                h3 {
-                    margin-top: 5px;
-                    color: #7159c1;
-                    font-size: 18px;
-                }
-
                 p {
                     margin-top: 10px;
                     margin-bottom: 10px;
                     font-weight: 400;
                     color: #7159c1;
                 }
-
                
             }
         }
