@@ -23,7 +23,7 @@ export default function Form() {
     const [ mark, setMark ] = useState('');
     const [ renew, setRenew ] = useState(false);
     const [ fipe, setFipe ] = useState('');
-    const [ securi, setSecuri ] = useState(0);
+    const [ safe, setSafe ] = useState(0);
     const [ item, setItem ] = useState('');
     
 
@@ -49,7 +49,7 @@ export default function Form() {
         setMark('');
         setRenew(false);
         setFipe('');
-        setSecuri(0);
+        setSafe(0);
 
         toast.success("Compos limpos!");
     }
@@ -70,29 +70,29 @@ export default function Form() {
     }
 
     function handleCalculc() {
-        setSecuri(0)
+        setSafe(0)
         if(!mark){
             toast.warn("Selecione a marca do veiculo");
         } else if (renew === true && (mark === 'Fiat' || mark === 'Chevrolet')) {
-            const securiValue = 97 / 100;
-            const total = fipe - (fipe * securiValue);
+            const safeValue = 97 / 100;
+            const total = fipe - (fipe * safeValue);
             const discountTen = 10 / 100;
             const totalDiscount = total - (total * discountTen);
-            setSecuri(totalDiscount);
+            setSafe(totalDiscount);
         }  else if(renew === false && (mark === 'Fiat' || mark === 'Chevrolet')) {
-            const securiValue = 97 / 100;
-            const total = fipe - (fipe * securiValue);
-            setSecuri(total);
+            const safeValue = 97 / 100;
+            const total = fipe - (fipe * safeValue);
+            setSafe(total);
         }   else if (renew === true && (mark !== 'Fiat' || mark !== 'Chevrolet')) {
-            const securiValue = 96 / 100;
-            const total = fipe - (fipe * securiValue);
+            const safeValue = 96 / 100;
+            const total = fipe - (fipe * safeValue);
             const discountTen = 10 / 100;
             const totalDiscount = total - (total * discountTen);
-            setSecuri(totalDiscount);
+            setSafe(totalDiscount);
         } else if (renew === false && (mark !== 'Fiat' || mark !== 'Chevrolet')) {
-            const securiValue = 96 / 100;
-            const total = fipe - (fipe * securiValue);
-            setSecuri(total);
+            const safeValue = 96 / 100;
+            const total = fipe - (fipe * safeValue);
+            setSafe(total);
         }
     }
 
@@ -114,7 +114,7 @@ export default function Form() {
                 let data = []
                 
                 if(localStorage.getItem('@spacecar/item')) {
-                    data = JSON.parse(localStorage.getItem('@spacecar/item'));
+                    data = await JSON.parse(localStorage.getItem('@spacecar/item'));
                 }
 
                 data.push(  
@@ -123,13 +123,17 @@ export default function Form() {
                         vehicle,
                         mark,
                         renew,
-                        fipe
+                        fipe,
+                        safe
                     }
                 );
                 
-                localStorage.setItem('@spacecar/item', JSON.stringify(data));
-    
+                localStorage.setItem('@spacecar/item', JSON.stringify(data))
+                
                 toast.success("Proposta Cadastrada!");
+
+                await JSON.parse(localStorage.getItem('@spacecar/item'));
+                
             } catch (err) {
                 toast.error("Erro ao cadastrar proposta.");
             }
@@ -180,9 +184,9 @@ export default function Form() {
                         </Grid>
                     </Grid>
                     {
-                        securi !== 0 ?
+                        safe !== 0 ?
                         <>
-                            <h2>Valor estimado do seguro: {formatPrice(securi)}</h2>
+                            <h2>Valor estimado do seguro: {formatPrice(safe)}</h2>
                             <Button type="submit" color="#7159c1">Registrar Interesse</Button> 
                         </>
                         :
@@ -194,9 +198,22 @@ export default function Form() {
                         {
                             item && item.map(i => (
                                 <li key={i.client}>
-                                    <h1>{i.client}</h1>
-                                    <p>{i.vehicle}</p>
-                                    <span>{formatPrice(i.fipe)}</span>
+                                    <div>
+                                        <span>Nome do cliente</span>
+                                        <p>{i.client}</p>
+                                    </div>
+                                    <div>
+                                        <span>Veiculo</span>
+                                        <p>{`${i.mark} - ${i.vehicle}`}</p>
+                                    </div>
+                                    <div>
+                                        <span>Valor do seguro</span>
+                                        <p>{formatPrice(i.safe)}</p>
+                                    </div>
+                                    <div>
+                                        <span>Valor do veiculo</span>
+                                        <p>{formatPrice(i.fipe)}</p>
+                                    </div>
                                 </li>
                             ))
                         }

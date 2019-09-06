@@ -33,18 +33,28 @@ export const Wrapper = styled.div`
             border-radius: 8px;
             background: rgba(255,255,255, 0.4);
 
-            h1 {
-                color: #7159c1;
-            }
+            div {
+                margin: 5px 0 5px;
+                
+                span {
+                    font-size: 12px;
+                    font-weight: 300;
+                }
 
-            p {
-                margin-top: 10px;
-                margin-bottom: 10px;
-                font-weight: 300;
-            }
+                h3 {
+                    margin-top: 5px;
+                    color: #7159c1;
+                    font-size: 18px;
+                }
 
-            span {
-                font-weight: bold;
+                p {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    font-weight: 400;
+                    color: #7159c1;
+                }
+
+               
             }
         }
     }
