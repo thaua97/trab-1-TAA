@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify'
 
+import { formatPrice } from '../../util/format';
+
 import {
     Container,
     Grid,
@@ -21,7 +23,8 @@ export default function Form() {
     const [ mark, setMark ] = useState('');
     const [ renew, setRenew ] = useState(false);
     const [ fipe, setFipe ] = useState('');
-    const [ item, setItem ] = useState('')
+    const [ securi, setSecuri ] = useState(0);
+    const [ item, setItem ] = useState('');
     
 
     function handleClientChange(e) {
@@ -34,7 +37,7 @@ export default function Form() {
         setMark(e.target.value);
     }
     function handleRenewChange(e) {
-        setRenew(e.target.value);
+        setRenew(e.target.checked);
     }
     function handleFipeChange(e) {
         setFipe(e.target.value);
@@ -46,6 +49,7 @@ export default function Form() {
         setMark('');
         setRenew(false);
         setFipe('');
+        setSecuri(0);
 
         toast.success("Compos limpos!");
     }
@@ -62,6 +66,33 @@ export default function Form() {
             
         } catch (err) {
             toast.error('Erro ao Carregar informações!')
+        }
+    }
+
+    function handleCalculc() {
+        setSecuri(0)
+        if(!mark){
+            toast.warn("Selecione a marca do veiculo");
+        } else if (renew === true && (mark === 'Fiat' || mark === 'Chevrolet')) {
+            const securiValue = 97 / 100;
+            const total = fipe - (fipe * securiValue);
+            const discountTen = 10 / 100;
+            const totalDiscount = total - (total * discountTen);
+            setSecuri(totalDiscount);
+        }  else if(renew === false && (mark === 'Fiat' || mark === 'Chevrolet')) {
+            const securiValue = 97 / 100;
+            const total = fipe - (fipe * securiValue);
+            setSecuri(total);
+        }   else if (renew === true && (mark !== 'Fiat' || mark !== 'Chevrolet')) {
+            const securiValue = 96 / 100;
+            const total = fipe - (fipe * securiValue);
+            const discountTen = 10 / 100;
+            const totalDiscount = total - (total * discountTen);
+            setSecuri(totalDiscount);
+        } else if (renew === false && (mark !== 'Fiat' || mark !== 'Chevrolet')) {
+            const securiValue = 96 / 100;
+            const total = fipe - (fipe * securiValue);
+            setSecuri(total);
         }
     }
 
@@ -125,19 +156,21 @@ export default function Form() {
                                     <em>None</em>
                                 </MenuItem>
                                 <MenuItem value="Ford">Ford</MenuItem>
+                                <MenuItem value="Chevrolet">Chevrolet</MenuItem>
                                 <MenuItem value="Renaut">Renaut</MenuItem>
                                 <MenuItem value="Fiat">Fiat</MenuItem>
+                                <MenuItem value="Volkswagen">Volkswagen</MenuItem>
                                 </Select>
                             </SelectControl>
                         </Grid>
                         <Grid item xs={6}>
-                            <ControlLabel control={<Check value="checkedC" />} label="Renovação" />
+                            <ControlLabel control={<Check type="checkbox" onChange={handleRenewChange} value={renew} />} label="Renovação" />
                         </Grid>
                     </Grid>
-                    <Text value={fipe} onChange={handleFipeChange} variant="filled" label="R$ Avaliação Tabela Fipe"/>
+                    <Text value={fipe} onChange={handleFipeChange} type="number" variant="filled" label="R$ Avaliação Tabela Fipe"/>
                     <Grid container spacing={2}>
                         <Grid item xs={4}>
-                            <Button type="button" color="#d0d615">Calcular</Button>
+                            <Button type="button" onClick={handleCalculc} color="#d0d615">Calcular</Button>
                         </Grid>
                         <Grid item xs={4}>
                             <Button type="button" onClick={handleClear} color="#15d696">Novo</Button>
@@ -146,8 +179,15 @@ export default function Form() {
                             <Button type="button" onClick={handleToList} color="#7159c1">Listar</Button>
                         </Grid>
                     </Grid>
-                    <h2>Valor estimado do seguro: R$1.080.00</h2>
-                    <Button type="submit" color="#7159c1">Registrar Interesse</Button>
+                    {
+                        securi !== 0 ?
+                        <>
+                            <h2>Valor estimado do seguro: {formatPrice(securi)}</h2>
+                            <Button type="submit" color="#7159c1">Registrar Interesse</Button> 
+                        </>
+                        :
+                    null
+                    }
                 </FormCars>
                 {item !== '' ? 
                     <ul>
@@ -156,7 +196,7 @@ export default function Form() {
                                 <li key={i.client}>
                                     <h1>{i.client}</h1>
                                     <p>{i.vehicle}</p>
-                                    <span>{i.fipe}</span>
+                                    <span>{formatPrice(i.fipe)}</span>
                                 </li>
                             ))
                         }
